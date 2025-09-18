@@ -1,4 +1,4 @@
 pogo-passport-key.json
-venv/
+*.pyc
 __pycache__/
 .env

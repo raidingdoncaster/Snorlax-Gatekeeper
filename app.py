@@ -74,24 +74,19 @@ def campfire_dashboard(group_id):
 
 # Google Sheets setup
 import json
+from google.oauth2 import service_account
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive"
 ]
 
-google_service_account_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
-if google_service_account_json:
-    service_account_info = json.loads(google_service_account_json)
-    creds = Credentials.from_service_account_info(service_account_info, scopes=SCOPES)
-else:
+if "GOOGLE_SERVICE_ACCOUNT_JSON" not in os.environ:
     raise RuntimeError("❌ GOOGLE_SERVICE_ACCOUNT_JSON not set in environment")
-    # Fallback to local file for development
-    SERVICE_ACCOUNT_FILE = "pogo-passport-key.json"
-    creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
+service_account_info = json.loads(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"])
+creds = service_account.Credentials.from_service_account_info(service_account_info, scopes=SCOPES)
 client = gspread.authorize(creds)
-sheet = client.open("POGO Passport Sign-Ins").sheet1
 
 # Uploads folder setup
 UPLOAD_FOLDER = "uploads"
