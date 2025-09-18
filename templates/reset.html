@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Reset PIN</h2>
+<p>We detected your trainer name as:</p>
+<h3>{{ trainer_name }}</h3>
+<form method="POST" action="/reset">
+    <input type="hidden" name="trainer_name" value="{{ trainer_name }}">
+    <input type="text" name="reset_code" placeholder="Enter your secret reset code" required>
+    <input type="password" name="new_pin" placeholder="Enter new 4-digit PIN" maxlength="4" required>
+    <button type="submit">Reset PIN</button>
+</form>
+<div class="link">
+    Not correct? <a href="/forgot">Try Again</a>
+</div>
+{% endblock %}

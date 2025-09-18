@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Create Account</h2>
+<form method="POST" enctype="multipart/form-data">
+    <p>Upload a screenshot of your Trainer Profile:</p>
+    <input type="file" name="screenshot" accept="image/*" required>
+    <button type="submit">Continue</button>
+</form>
+<div class="link">
+    Already have an account? <a href="/login">Log In</a>
+</div>
+{% endblock %}

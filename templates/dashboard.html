@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .dashboard-header {
+        text-align: center;
+        margin: 30px 0;
+    }
+    .trainer-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #ddd;
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+    .trainer-name {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    .passport-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+    .passport-info i {
+        color: #007bff;
+    }
+    .logout-btn {
+        margin-bottom: 20px;
+    }
+    .activity-section {
+        margin: 40px auto;
+        max-width: 900px;
+    }
+    .activity-card {
+        height: 150px;
+        background-color: #f1f3f5;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #6c757d;
+        font-style: italic;
+    }
+    .welcome-message {
+        text-align: center;
+        margin: 40px 0 20px 0;
+    }
+</style>
+
+<div class="dashboard-header">
+    <!-- Trainer Avatar -->
+    {% if screenshot %}
+        <img src="{{ screenshot }}" alt="Trainer Avatar" class="trainer-avatar">
+    {% else %}
+        <img src="/static/default-avatar.png" alt="Trainer Avatar" class="trainer-avatar">
+    {% endif %}
+
+    <!-- Name + Stamps in one row -->
+    <div class="trainer-info">
+        <span class="trainer-name">{{ trainer_name }}</span>
+        <span class="passport-info">
+            <i class="bi bi-passport-fill"></i> {{ progress }} Stamps
+        </span>
+    </div>
+
+    <!-- Logout -->
+    <a href="{{ url_for('logout') }}" class="btn btn-sm btn-danger logout-btn">Log Out</a>
+</div>
+
+<style>
+    .dashboard-header {
+        text-align: center;
+        margin: 30px 0;
+    }
+    .trainer-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #ddd;
+        display: block;
+        margin: 0 auto 15px auto;
+    }
+    .trainer-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    .trainer-name {
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+    .passport-info {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        color: #007bff;
+    }
+    .passport-info i {
+        margin-right: 6px;
+    }
+    .logout-btn {
+        margin-top: 5px;
+    }
+</style>
+
+<!-- Recent Activity -->
+<div class="activity-section">
+    <h4>Recent Activity</h4>
+    <div class="activity-grid">
+        <div class="activity-card">Last meet-up checked into (skeleton)</div>
+        <div class="activity-card">Last reward claimed (skeleton)</div>
+        <div class="activity-card">
+            Player statistics:<br>
+            • Total meetups: (skeleton)<br>
+            • Membership length: (skeleton)
+        </div>
+    </div>
+</div>
+
+<style>
+    .activity-section {
+        margin: 40px auto;
+        max-width: 1000px;
+    }
+    .activity-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .activity-card {
+        flex: 1;
+        min-width: 280px;
+        height: 160px;
+        background-color: #f1f3f5;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #6c757d;
+        font-style: italic;
+        text-align: center;
+        padding: 10px;
+    }
+</style>
+
+<!-- Welcome Back -->
+<div class="welcome-message">
+    <h5>Welcome back, {{ trainer_name }}</h5>
+    <p class="text-muted">Please choose an option from the list below</p>
+</div>
+
+<!-- Options -->
+<div class="text-center">
+    <a href="{{ url_for('manage_account') }}" class="btn btn-primary">Manage Account</a>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+{% endblock %}

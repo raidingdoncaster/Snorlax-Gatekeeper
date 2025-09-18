@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ title }}</h2>
+<p>{{ message or "Something went wrong. Please try again." }}</p>
+<div class="link">
+    <a href="/login">⬅ Back to Log In</a>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Confirm Trainer Name</h2>
+<p>We detected your trainer name as:</p>
+<h3>{{ trainer_name }}</h3>
+<form method="POST" action="/confirm">
+    <input type="hidden" name="trainer_name" value="{{ trainer_name }}">
+    <input type="password" name="pin" placeholder="Choose 4-digit PIN" maxlength="4" required>
+    <input type="text" name="reset_code" placeholder="Set a secret memorable password" required>
+    <button type="submit">Finish Sign Up</button>
+</form>
+<div class="link">
+    Not correct? <a href="/signup">Try Again</a>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+Flask
+gspread
+google-auth
+pytesseract
+Pillow
+gunicorn
+python-dotenv

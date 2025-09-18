@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container" style="max-width:600px; margin-top:30px;">
+    <h2>Manage Account</h2>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+        <div class="alert alert-success">{{ success }}</div>
+    {% endif %}
+
+<!-- Update PIN -->
+<div class="card p-3 mb-4">
+    <h4>Update PIN</h4>
+    <form method="POST">
+        <input type="hidden" name="action" value="update_pin">
+
+        <div class="mb-3">
+            <label for="current_memorable" class="form-label">Current Memorable Password</label>
+            <input type="text" name="current_memorable" id="current_memorable" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="new_pin" class="form-label">New PIN</label>
+            <input type="password" name="new_pin" id="new_pin" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="confirm_pin" class="form-label">Confirm New PIN</label>
+            <input type="password" name="confirm_pin" id="confirm_pin" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update PIN</button>
+    </form>
+</div>
+
+<!-- Reset Memorable Password -->
+<div class="card p-3 mb-4">
+    <h4>Reset Memorable Password</h4>
+    <form method="POST">
+        <input type="hidden" name="action" value="reset_memorable">
+
+        <div class="mb-3">
+            <label for="current_pin" class="form-label">Current PIN</label>
+            <input type="password" name="current_pin" id="current_pin" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="new_memorable" class="form-label">New Memorable Password</label>
+            <input type="text" name="new_memorable" id="new_memorable" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Update Memorable Password</button>
+    </form>
+</div>
+
+    <a href="{{ url_for('dashboard') }}" class="btn btn-link">⬅ Back to Dashboard</a>
+</div>
+
+{% endblock %}
