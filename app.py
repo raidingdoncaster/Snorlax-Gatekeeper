@@ -79,15 +79,11 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-sa_json = os.getenv("GOOGLE_SERVICE_ACCOUNT")
-
-if sa_json:
-    try:
-        # Load service account credentials from env var
-        info = json.loads(sa_json)
-        creds = Credentials.from_service_account_info(info, scopes=SCOPES)
-    except Exception as e:
-        raise RuntimeError(f"Failed to parse GOOGLE_SERVICE_ACCOUNT env var: {e}")
+if os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON"):
+    service_account_info = json.loads(os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON"))
+    creds = Credentials.from_service_account_info(service_account_info, scopes=SCOPES)
+else:
+    raise RuntimeError("❌ GOOGLE_SERVICE_ACCOUNT_JSON not set in environment")
 else:
     # Fallback to local file for development
     SERVICE_ACCOUNT_FILE = "pogo-passport-key.json"
