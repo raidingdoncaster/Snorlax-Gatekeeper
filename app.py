@@ -2,6 +2,7 @@ import os
 import hashlib
 import gspread
 import pytesseract
+import tesseract-ocr
 from PIL import Image
 from werkzeug.utils import secure_filename
 from flask import (
