@@ -12,6 +12,7 @@ from google.oauth2.service_account import Credentials
 
 # create Flask app instance
 app = Flask(__name__)
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev_secret")
 
 # Campfire related below
 from campfire.client import CampfireClient
