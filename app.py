@@ -72,12 +72,27 @@ def campfire_dashboard(group_id):
 
 
 # Google Sheets setup
-SERVICE_ACCOUNT_FILE = "pogo-passport-key.json"
+import json
+
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive"
 ]
-creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+
+sa_json = os.getenv("GOOGLE_SERVICE_ACCOUNT")
+
+if sa_json:
+    try:
+        # Load service account credentials from env var
+        info = json.loads(sa_json)
+        creds = Credentials.from_service_account_info(info, scopes=SCOPES)
+    except Exception as e:
+        raise RuntimeError(f"Failed to parse GOOGLE_SERVICE_ACCOUNT env var: {e}")
+else:
+    # Fallback to local file for development
+    SERVICE_ACCOUNT_FILE = "pogo-passport-key.json"
+    creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+
 client = gspread.authorize(creds)
 sheet = client.open("POGO Passport Sign-Ins").sheet1
 
